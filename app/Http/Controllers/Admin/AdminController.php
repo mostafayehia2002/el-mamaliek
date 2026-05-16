@@ -36,12 +36,12 @@ class AdminController extends Controller
             'name' => ['required', 'unique:admins,name'],
             'password' => 'required',
             'email' => ['required', 'unique:admins,email'],
-        ],[
-          'name.required'  =>'تم اضافة المستخدم بنجاح',
-            'name.unique'=>'هذا الاسم موجود مسبقا',
-            'email.unique'=>'البريد الالكتروني موجود مسبقا',
-            'email.required'=>'يرجي ادخال البريد الالكتروني',
-              'password.required' => 'يرجي ادخال الرقم السري',
+        ], [
+            'name.required'  => 'تم اضافة المستخدم بنجاح',
+            'name.unique' => 'هذا الاسم موجود مسبقا',
+            'email.unique' => 'البريد الالكتروني موجود مسبقا',
+            'email.required' => 'يرجي ادخال البريد الالكتروني',
+            'password.required' => 'يرجي ادخال الرقم السري',
         ]);
         Admin::create([
             'name' => $r->name,
@@ -59,26 +59,29 @@ class AdminController extends Controller
     }
     public function updateAdmin($id, Request $r)
     {
-       $admin= Admin::findOrFail($id);
-        $oldImg =$admin->photo;
-        if($r->hasFile('photo')){
+        $admin = Admin::findOrFail($id);
+        $oldImg = $admin->photo;
+
+
+        if ($r->hasFile('photo')) {
+
             $img = $r->file('photo')->getClientOriginalName();
             $r->file('photo')->storeAs('profile/', $img, 'admin');
             if ($oldImg !== 'profile.jpg') {
                 Storage::disk('admin')->delete('profile/' . $oldImg);
             }
-            }else{
+        } else {
             $img = $oldImg;
         }
 
         $r->validate([
-            'name' => 'required|unique:admins,name,'.$id,
-            'email' => 'required|unique:admins,email,'.$id,
-        ],[
-            'name.required'  =>'تم اضافة المستخدم بنجاح',
-            'name.unique'=>'هذا الاسم موجود مسبقا',
-            'email.unique'=>'البريد الالكتروني موجود مسبقا',
-            'email.required'=>'يرجي ادخال البريد الالكتروني'
+            'name' => 'required|unique:admins,name,' . $id,
+            'email' => 'required|unique:admins,email,' . $id,
+        ], [
+            'name.required'  => 'تم اضافة المستخدم بنجاح',
+            'name.unique' => 'هذا الاسم موجود مسبقا',
+            'email.unique' => 'البريد الالكتروني موجود مسبقا',
+            'email.required' => 'يرجي ادخال البريد الالكتروني'
         ]);
         if ($r->has('password') && !empty($r->password)) {
             $admin->update([
@@ -87,7 +90,7 @@ class AdminController extends Controller
                 'password' => Hash::make($r->password),
                 'photo' => $img,
             ]);
-        } else{
+        } else {
             $admin->update([
                 'name' => $r->name,
                 'email' => $r->email,
@@ -99,14 +102,14 @@ class AdminController extends Controller
 
     public function deleteAdmin($id)
     {
-        $admin=  Admin::find($id);
-        $oldImg=$admin->photo;
-        if (Auth::guard('admins')->user()->id == $id) {
+        $admin =  Admin::find($id);
+        $oldImg = $admin->photo;
+        if (Auth::guard('admins')->id() == $id) {
             return  redirect()->route('admin.notAllowed');
-        } else{
+        } else {
             $admin->delete();
             if ($oldImg !== 'profile.jpg') {
-                Storage::disk('admin')->delete('profile/'.$oldImg);
+                Storage::disk('admin')->delete('profile/' . $oldImg);
             }
             return redirect()->back()->with('success', 'تم حذف المستخدم بنجاح');
         }

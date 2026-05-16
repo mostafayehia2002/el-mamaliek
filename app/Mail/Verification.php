@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 
 class Verification extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable,SerializesModels;
 private $code;
 private  $name;
     /**

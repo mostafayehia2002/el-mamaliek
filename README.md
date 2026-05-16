@@ -1,66 +1,162 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌟 ElMamalek
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel-based marketplace and order management system for digital products, account videos, and recharge services with separate user and admin experiences.
 
-## About Laravel
+**Author:** Mostafa Yehia
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![Laravel 10](https://img.shields.io/badge/Laravel-10.x-red?style=for-the-badge&logo=laravel)
+![PHP 8.1+](https://img.shields.io/badge/PHP-8.1+-777BB4?style=for-the-badge&logo=php)
+![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql)
+![Laravel Breeze](https://img.shields.io/badge/Breeze-Auth-blue?style=for-the-badge)
+![Laravel Sanctum](https://img.shields.io/badge/Sanctum-API-2D3748?style=for-the-badge)
+![Toastr](https://img.shields.io/badge/Toastr-UI_Alerts-orange?style=for-the-badge)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📌 Quick Links
 
-## Learning Laravel
+| Section | Link |
+|---|---|
+| Overview | [What it is](#-overview) |
+| Features | [Main Features](#-main-features) |
+| Stack | [Tech Stack](#-tech-stack) |
+| Setup | [Installation](#-installation) |
+| Flow | [Quick Start Guide](#-quick-start-guide) |
+| API | [API Documentation](#-api-documentation) |
+| Structure | [Project Structure](#-project-structure) |
+| Auth | [Authentication](#-authentication) |
+| Delivery | [Testing & Deployment](#-testing--deployment) |
+| Help | [Support & License](#-support--license) |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## ✨ Overview
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**ElMamalek** is a Laravel 10 application for browsing products, purchasing digital accounts or recharge services, uploading payment proof, and letting administrators review and approve orders from a dedicated dashboard.
 
-## Laravel Sponsors
+## 🚀 Main Features
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 👤 Customer / User Side
+- Browse the homepage and explore **code-based products** and **charge-based products**.
+- View **account videos** and account details.
+- Select a product, choose a payment account, and submit an order with payment proof.
+- Receive an instant confirmation while the order waits for admin approval.
 
-### Premium Partners
+### 🛡️ Admin Side
+- Log in through a separate admin area.
+- Manage admins, users, categories, products, charge products, payments, and payment accounts.
+- Review, accept, or delete **orders** and **order charges**.
+- View and clear notifications for incoming purchase requests.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 🔔 System Highlights
+- Separate authentication guards for users and admins.
+- Email + database notifications for new order requests.
+- File upload support for payment screenshots.
+- Clean Laravel MVC structure with role-based routing.
 
-## Contributing
+## 🛠 Tech Stack
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Framework:** Laravel 10
+- **Language:** PHP 8.1+
+- **Database:** MySQL
+- **Authentication:** Laravel Breeze + custom admin guard
+- **API Auth:** Laravel Sanctum
+- **UI Notifications:** Toastr
+- **Mailer:** SMTP / Mail providers supported by Laravel
 
-## Code of Conduct
+## ⚙️ Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. **Clone the repository** and open the project folder.
+2. **Install PHP dependencies**:
+   ```bash
+   composer install
+   ```
+3. **Install frontend dependencies**:
+   ```bash
+   npm install
+   ```
+4. **Copy and configure environment variables** in `.env`.
+5. **Generate an application key** if needed:
+   ```bash
+   php artisan key:generate
+   ```
+6. **Run migrations and seed the database**:
+   ```bash
+   php artisan migrate --seed
+   ```
+7. **Create the storage link** for uploaded files:
+   ```bash
+   php artisan storage:link
+   ```
+8. **Build frontend assets**:
+   ```bash
+   npm run build
+   ```
+9. **Start the local server**:
+   ```bash
+   php artisan serve
+   ```
 
-## Security Vulnerabilities
+> Make sure your database and mail settings in `.env` are correct before running the app.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🧭 Quick Start Guide
 
-## License
+1. Open the home page and browse available categories.
+2. Choose either a **code product** or a **charge product**.
+3. Log in or register using the user authentication flow.
+4. Select a payment method and related payment account.
+5. Upload the payment screenshot and submit the order.
+6. Wait for admin review and approval from the dashboard.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📡 API Documentation
+
+The project does **not** expose a public REST API yet. It currently includes the default authenticated Sanctum endpoint:
+
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| GET | `/api/user` | Sanctum | Returns the authenticated user profile |
+
+## 🗂 Project Structure
+
+| Path | Purpose |
+|---|---|
+| `app/Http/Controllers/User` | Public user flows, orders, and auth |
+| `app/Http/Controllers/Admin` | Admin dashboard and management actions |
+| `app/Models` | Eloquent models for users, products, orders, payments, and accounts |
+| `app/Notifications` | Mail/database notifications for new orders |
+| `routes/` | Web, auth, admin, and API routes |
+| `resources/views` | Blade templates for user and admin pages |
+| `database/migrations` | Schema definitions |
+| `database/seeders` | Initial database seed data |
+
+## 🔐 Authentication
+
+- **Users** authenticate through the default `web` guard.
+- **Admins** use a dedicated `admins` guard and must pass the `IsAdmin` middleware.
+- User registration works by requesting a verification code via email.
+- Admin login is isolated under the `/admin` area.
+- The API layer uses **Laravel Sanctum** for authenticated requests.
+
+## ✅ Testing & Deployment
+
+### Testing
+Run the test suite with:
+
+```bash
+php artisan test
+```
+
+### Deployment Checklist
+- Set production values in `.env`.
+- Run `php artisan config:cache`, `php artisan route:cache`, and `php artisan view:cache`.
+- Build frontend assets with `npm run build`.
+- Run migrations on the production database.
+- Ensure the storage directory is writable and linked.
+
+## 🤝 Support & License
+
+- For support, review the relevant files in `routes/`, `app/Http/Controllers/`, and `app/Models/`, or contact the project maintainer.
+- This project is licensed under the **MIT License**.
+
+Mostafa Yehia
+

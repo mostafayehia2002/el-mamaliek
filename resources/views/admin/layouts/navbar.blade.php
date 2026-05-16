@@ -15,71 +15,100 @@
                 <li><a class="dropdown-item active" href="#">عربي</a></li>
             </ul>
         </div>
-        <a href="" style=" position: relative;">
-            <i class="fa-solid fa-message"></i>
-            <div class="numberOfNotify">0</div>
-        </a>
-        <div class="notification-menu">
+{{--        contact us --}}
         <a href="#" style=" position: relative;">
+            <i class="fa-solid fa-message"></i>
+             {{-- <div class="numberOfNotify">0</div>--}}
+        </a>
+        {{-- notifications  --}}
+        <div class="notification-menu">
+        <a href="#" style=" position: relative;" class="notifications">
             <i class="fa-sharp fa-solid fa-bell"></i>
-            <div class="numberOfNotify">0</div>
+             <div class=""></div>
         </a>
           <div class="notification-dropdown">
-
               <div class="title-notification">
-                  <a  href="" class="title-name">الاشعارات</a>
-
+                  <a  href="#" class="title-name">الاشعارات</a>
                   <a href="#" class="title-markAll">قراءة الكل</a>
               </div>
               <ul class="notification-content">
-                  <li class="unread">
-                      <a>
-                          <div class="img">
-                              <img src="{{asset('admin/admin_image/profile/profile.jpg')}}" alt="Image">
-                          </div>
-                          <div class="text">
-                              <strong>gad993813@gmail.com</strong>
-                              <p>
-                                   قام بشراء منتج <mark>شحن بوتات</mark> في انتظار الموافقه
 
-                              </p>
 
-                          </div>
-                          <div class="date">
-                              <strong>01-01-2024</strong>
-                          </div>
-
-                      </a>
-                  </li>
-                  <li >
-                      <a>
-                          <div class="img">
-                              <img src="{{asset('admin/admin_image/profile/profile.jpg')}}" alt="Image">
-                          </div>
-                          <div class="text">
-                              <strong>gad993813@gmail.com</strong>
-                              <p>
-                                  قام بشراء منتج <mark>شحن بوتات</mark> في انتظار الموافقه
-
-                              </p>
-                          </div>
-                          <div class="date">
-                              <strong>01-01-2024</strong>
-                          </div>
-
-                      </a>
-                  </li>
               </ul>
-
           </div>
+
+
         </div>
 
         <span class="setting">
-                  <i class="fa-solid fa-bars "></i>
+            <i class="fa-solid fa-bars "></i>
         </span>
     </div>
 </div>
-
+<script src='https://code.jquery.com/jquery-3.7.0.js'></script>
 <script>
+    $('.title-markAll').on('click', function () {
+        $.ajax({
+            url: "{{route('admin.readAllNotification')}}",
+            type: "GET",
+            dataType: "json",
+            success: function (data){},
+        });
+        window.location.reload();
+    });
+    //
+    window.onload=()=>{
+        getNotifications();
+    };
+    //
+    setInterval(function (){
+        getNotifications();
+    },500000);
 
+    $('.notifications').on('click', function () {
+        getNotifications();
+    });
+    function getNotifications(){
+        $('.notification-content').empty();
+        $.ajax({
+            url: "{{route('admin.getNotifications')}}",
+            type: "GET",
+            dataType: "json",
+            success: function (data){
+                for(let key in data){
+                    $('.notification-content').append(`
+         <li class="${data[key].read_at ===null?'unread':''}">
+         <a href="notifications/show/${data[key]['id']}">
+         <div class="img">
+            <img src="{{asset('admin/admin_image/profile/profile.jpg')}}" alt="">
+         </div>
+          <div class="text">
+            <strong> ${data[key].name} </strong>
+            <p>
+             قام بشراء منتج
+             <mark>${data[key].product}</mark>
+                ${data[key].message}
+            </p>
+        </div>
+        <div class="date">
+            <strong>${data[key].created_at}</strong>
+        </div>
+    </a>
+</li>
+`);}
+                let count=0,circle,list;
+                circle=document.querySelector('.notifications div');
+                list= document.querySelectorAll('.notification-content li');
+                Array.from(list).forEach((e)=>{
+                    e.classList.contains('unread')?count++:count;
+                });
+                if(count>0){
+                    circle.innerHTML=count;
+                    circle.classList.add('numberOfNotify');
+                }
+                console.log(count)
+            },
+        });
+    }
 </script>
+

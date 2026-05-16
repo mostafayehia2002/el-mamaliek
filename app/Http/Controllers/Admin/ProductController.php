@@ -56,4 +56,16 @@ class ProductController extends Controller
         Storage::disk('admin')->delete('products/products_code/'.$photo);
         return redirect()->back()->with('success','تم حذف المنتج بنجاح');
     }
+
+
+    public function update(Request $request){
+        $request->validate(['code'=>'required'],['code.required'=>'يرجي ادخال كود المنتج']);
+       $product=Product::find($request->id);
+       $product->update([
+           'code'=>$request->code,
+           'status'=>'متاح',
+       ]);
+
+       return redirect()->back()->with('success','تم تحديث كود المنتج بنجاح');
+    }
 }

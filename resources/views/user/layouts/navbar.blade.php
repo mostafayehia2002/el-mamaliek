@@ -244,13 +244,11 @@
 @endif
 {{--End Notification--}}
 {{--Send Code --}}
-<script src={{asset('https://code.jquery.com/jquery-3.7.0.js')}}></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script>
     document.addEventListener('click',function (e) {
         if(e.target.classList.contains('btn-code')){
-
             let email= document.querySelector('#email').value;
-
             if(email.trim() !== '') {
                 sendCode(email);
             }else{

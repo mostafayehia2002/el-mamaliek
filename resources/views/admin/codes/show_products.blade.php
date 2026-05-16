@@ -17,7 +17,7 @@
         </button>
         </div>
 
-        {{-- error  validation message--}}
+{{--         error  validation message--}}
         @if($errors->any())
             @foreach ($errors->all() as $error)
                 <div class="alert alert-danger message">{{$error}}</div>
@@ -54,8 +54,46 @@
                     @endif
                     </td>
                     <td>
-                        <a href="{{route('admin.deleteProduct',$product->id)}}" class="control-delete btn btn-primary"  onclick="return confirm('هل انت متاكد من حذف المنتج')"><span class="fa-solid fa-trash"></span></a>
+                        @if($product->status !='متاح')
+                        <a href="#updateProductCode{{$product->id}}" class="control-edit btn btn-primary" data-bs-toggle="modal" >
+                            <span class="fa-solid fa-pen-to-square"></span>
+                        </a>
+                        @endif
+                        <a href="{{route('admin.deleteProduct',$product->id)}}" class="control-delete btn btn-primary"
+                           onclick="return confirm('هل انت متاكد من حذف المنتج')">
+                            <span class="fa-solid fa-trash"></span>
+                        </a>
                     </td>
+                    <!-- Modal  Update Product Code-->
+                    <div class="modal fade" id="updateProductCode{{$product->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">تحديث كود المنتج</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{route('admin.updateProduct')}}" method="POST"  enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="mb-1">
+                                            <input type="hidden" name="id" value="{{$product->id}}">
+                                            <input type="text" class="form-control" id="name" name="name" value="{{$product->product_name}}" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="code" class="form-label">كود المنتج:</label>
+                                            <input type="text" class="form-control" id="code" name="code"  value="{{old('code')}}">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">مسح</button>
+                                            <button type="submit" class="btn btn-primary">تحديث</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{--End Model--}}
                 </tr>
             @endforeach
             </tbody>

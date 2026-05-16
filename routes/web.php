@@ -20,3 +20,5 @@ Route::controller(UserInterfaceController::class)->group(function (){
 });
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
+//if user enter route not found in system
+Route::fallback(fn() => abort('404'));

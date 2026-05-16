@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminAuth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryChargeController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderNotifications;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\OrderChargeController;
 use App\Http\Controllers\Admin\OrderController;
@@ -17,12 +18,15 @@ Route::middleware('guest:admins')->group(function () {
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('login', [AuthenticatedSessionController::class,'store']);
 });
+
+
 Route::middleware('auth:admins')->group(function () {
     Route::get('notAllowed',function (){
         return view('admin.not_allowed');
     })->name('notAllowed');
+
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
     Route::controller(AdminController::class)->group(function (){
@@ -77,6 +81,7 @@ Route::middleware('auth:admins')->group(function () {
         Route::get('products', 'index')->name('showProducts');
         Route::Post('products/store', 'store')->name('storeProduct');
         Route::get('products/delete/{id}', 'delete')->name('deleteProduct');
+         Route::post('product/update','update')->name('updateProduct');
     });
     Route::controller(OrderController::class)->group(function (){
         Route::get('orders', 'index')->name('showOrders');
@@ -88,6 +93,12 @@ Route::middleware('auth:admins')->group(function () {
     Route::controller(UserController::class)->group(function (){
         Route::get('users', 'index')->name('showUsers');
         Route::get('users/delete/{id}', 'delete')->name('deleteUser');
+    });
+    //notifications
+    Route::controller(OrderNotifications::class)->group(function (){
+     Route::get('/notifications','getNotifications')->name('getNotifications');
+        Route::get('notifications/show/{id}','showNotification')->name('showNotification');
+        Route::get('notifications/readAll','readAllNotification')->name('readAllNotification');
     });
 
 });
